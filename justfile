@@ -25,7 +25,8 @@ new-lib name:
     git checkout "$SOURCE_BRANCH" -- .gitignore justfile README.md .gitattributes
     
     # Create standard directory structure
-    mkdir -p {{name}}/-
+    SOURCE_TIP_DIR="{{name}}/-"
+    mkdir -p $SOURCE_TIP_DIR
     
     # Generate a catalog file
     echo "{{name}}:" > "{{name}}@.rhy"
@@ -40,9 +41,9 @@ new-lib name:
     echo "-: ~" >> "{{name}}@.rhy"
 
     # Generate an entry point source file
-    echo "hello .= [] -> (" > "-/+{{name}}.rh"
-    echo "    'Hello from the {{name}} Base Library!'" >> "-/+{{name}}.rh"
-    echo ")" >> "-/+{{name}}.rh"
+    echo "hello .= [] -> (" > "$SOURCE_TIP_DIR/+{{name}}.rh"
+    echo "    'Hello from the {{name}} Base Library!'" >> "$SOURCE_TIP_DIR/+{{name}}.rh"
+    echo ")" >> "$SOURCE_TIP_DIR/+{{name}}.rh"
 
     # ---------------------------
 
