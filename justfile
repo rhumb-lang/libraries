@@ -29,14 +29,14 @@ new-lib name:
     
     # Generate a catalog file
     echo "{{name}}:" > "{{name}}@.rhy"
-    echo "    👤: Jake Russo # author" >> "README_{{name}}.md"
-    echo "    🪪: MIT # license" >> "README_{{name}}.md"
-    echo "    📦: https://github.com/user/repo" >> "README_{{name}}.md"
+    echo "    👤: Jake Russo # author" >> "{{name}}@.rhy"
+    echo "    🪪: MIT # license" >> "{{name}}@.rhy"
+    echo "    📦: https://github.com/user/repo" >> "{{name}}@.rhy"
     echo "    📝: >" >> "README_{{name}}.md"
-    echo "        This is the initial description of the {{name}} Base Library and it can span" >> "README_{{name}}.md"
-    echo "        multiple lines using thr yaml \">\" operator" >> "README_{{name}}.md"
-    echo "" >> "README_{{name}}.md"
-    echo "-: ~" >> "README_{{name}}.md"
+    echo "        This is the initial description of the {{name}} Base Library and it can span" >> "{{name}}@.rhy"
+    echo "        multiple lines using thr yaml \">\" operator" >> "{{name}}@.rhy"
+    echo "" >> "{{name}}@.rhy"
+    echo "-: ~" >> "{{name}}@.rhy"
 
     # Generate an entry point source file
     echo "hello .= [] -> (" > "-/+{{name}}.rh"
