@@ -118,9 +118,13 @@ generate-readme source_branch="main":
     echo "| Library Name |" >> "$TMP"
     echo "| :--- |" >> "$TMP"
 
+    # Determine base URL for links (handling SSH and HTTPS forms for GitHub)
+    REMOTE_URL=$(git remote get-url origin | sed -e 's/^git@github.com:/https:\/\/github.com\//' -e 's/\.git$//')
+
     # Get list of branches, sort them
-    git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v "^{{source_branch}}$" | sort | while read branch; do
-        echo "| $branch |" >> "$TMP"
+    git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v "^{{source_branch}}$" | sort | while read -r branch; do
+        # We rely on Markdown/Browser to handle URL encoding of unicode branch names
+        echo "| [$branch]($REMOTE_URL/tree/$branch) |" >> "$TMP"
     done
 
     echo "" >> "$TMP"

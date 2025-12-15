@@ -4,7 +4,7 @@
 
 | Library Name |
 | :--- |
-| 🧮 |
+| [🧮](https://github.com/rhumb-lang/libraries/tree/🧮) |
 
 <!-- FOOTER -->
 
