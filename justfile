@@ -94,3 +94,40 @@ sync-shared source_branch="main":
     git checkout "$CURRENT_BRANCH" > /dev/null 2>&1
     echo "--------------------------------"
     echo "✨ Sync complete."
+
+# Generate a catalog of libraries in the main README.md                                                                                                                                     │ 
+generate-readme source_branch="main":
+    #!/usr/bin/env bash
+    set -e
+    CURRENT_BRANCH=$(git branch --show-current)
+
+    if [ "$CURRENT_BRANCH" != "{{source_branch}}" ]; then
+        echo "Error: Please run this command from the '{{source_branch}}' branch."
+        exit 1
+    fi
+
+    echo "Generating catalog README..."
+
+    TMP=$(mktemp)
+
+    # Capture text before HEADER (inclusive)
+    sed '/<!-- HEADER -->/q' README.md > "$TMP"
+
+    # Generate Table
+    echo "" >> "$TMP"
+    echo "| Library Name |" >> "$TMP"
+    echo "| :--- |" >> "$TMP"
+
+    # Get list of branches, sort them
+    git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v "^{{source_branch}}$" | sort | while read branch; do
+        echo "| $branch |" >> "$TMP"
+    done
+
+    echo "" >> "$TMP"
+
+    # Capture text from FOOTER (inclusive) to end
+    sed -n '/<!-- FOOTER -->/,$p' README.md >> "$TMP"
+
+    mv "$TMP" README.md
+
+    echo "✅ README.md updated with library catalog."  

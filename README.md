@@ -2,9 +2,9 @@
 
 <!-- HEADER -->
 
-|Library Name|
-|------------|
-| _(null)_   |
+| Library Name |
+| :--- |
+| 🧮 |
 
 <!-- FOOTER -->
 
