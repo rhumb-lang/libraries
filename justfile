@@ -23,17 +23,25 @@ new-lib name:
     git rm -rf . > /dev/null
 
     git checkout "$SOURCE_BRANCH" -- .gitignore justfile README.md .gitattributes
-    # Create standard directory structure
-    mkdir -p src tests
     
-    # Generate a library-specific README
-    echo "# {{name}}" > "README_{{name}}.md"
+    # Create standard directory structure
+    mkdir -p -
+    
+    # Generate a catalog file
+    echo "{{name}}:" > "{{name}}@.rhy"
+    echo "    👤: Jake Russo # author" >> "README_{{name}}.md"
+    echo "    🪪: MIT # license" >> "README_{{name}}.md"
+    echo "    📦: https://github.com/user/repo" >> "README_{{name}}.md"
+    echo "    📝: >" >> "README_{{name}}.md"
+    echo "        This is the initial description of the {{name}} Base Library and it can span" >> "README_{{name}}.md"
+    echo "        multiple lines using thr yaml \">\" operator" >> "README_{{name}}.md"
     echo "" >> "README_{{name}}.md"
-    echo "Documentation for the **{{name}}** library." >> "README_{{name}}.md"
+    echo "-: ~" >> "README_{{name}}.md"
 
-    # Generate a starter source file
-    echo "def hello():" > "src/lib.py"
-    echo "    print('Hello from {{name}}!')" >> "src/lib.py"
+    # Generate an entry point source file
+    echo "hello .= [] -> (" > "-/+{{name}}.rh"
+    echo "    'Hello from the {{name}} Base Library!'" >> "-/+{{name}}.rh"
+    echo ")" >> "-/+{{name}}.rh"
 
     # ---------------------------
 
