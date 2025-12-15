@@ -25,16 +25,17 @@ new-lib name:
     git checkout "$SOURCE_BRANCH" -- .gitignore justfile README.md .gitattributes
     
     # Create standard directory structure
-    mkdir -p -
+    mkdir -p {{name}}/-
     
     # Generate a catalog file
     echo "{{name}}:" > "{{name}}@.rhy"
     echo "    👤: Jake Russo # author" >> "{{name}}@.rhy"
-    echo "    🪪: MIT # license" >> "{{name}}@.rhy"
-    echo "    📦: https://github.com/user/repo" >> "{{name}}@.rhy"
-    echo "    📝: >" >> "README_{{name}}.md"
+    echo "    🪪: MIT" >> "{{name}}@.rhy"
+    echo "    📦: https://github.com/rhumb-lang/libraries" >> "{{name}}@.rhy"
+    echo "    📝: >" >> "{{name}}@.rhy"
     echo "        This is the initial description of the {{name}} Base Library and it can span" >> "{{name}}@.rhy"
     echo "        multiple lines using thr yaml \">\" operator" >> "{{name}}@.rhy"
+    echo "    📂: {{name}}" >> "{{name}}@.rhy"
     echo "" >> "{{name}}@.rhy"
     echo "-: ~" >> "{{name}}@.rhy"
 
