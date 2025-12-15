@@ -22,10 +22,7 @@ new-lib name:
     # Remove all files from the previous branch context to start fresh
     git rm -rf . > /dev/null
 
-    # Bring in the shared files from the source branch
-    git checkout "$SOURCE_BRANCH" -- .gitignore justfile README.md
-
-    # --- Template Generation ---
+    git checkout "$SOURCE_BRANCH" -- .gitignore justfile README.md .gitattributes
     # Create standard directory structure
     mkdir -p src tests
     
@@ -74,7 +71,7 @@ sync-shared source_branch="main":
         
         # Force checkout the shared files from the source branch
         # This overwrites the local versions with the source versions
-        git checkout "{{source_branch}}" -- .gitignore justfile README.md
+        git checkout "{{source_branch}}" -- justfile README.md .gitattributes
         
         # Check if there are changes to commit
         if ! git diff --quiet --cached; then
